@@ -7,11 +7,9 @@
 import express from 'express'
 import { mapOrder } from '~/utils/sorts.js'
 import connectDB from '~/config/mongodb.js'
+import env from '~/config/environment.js'
 
 const app = express()
-
-const hostname = 'localhost'
-const port = 8017
 
 // Connect to MongoDB
 connectDB()
@@ -34,7 +32,9 @@ app.get('/', (req, res) => {
   res.end('<h1>Hello World!</h1><hr>')
 })
 
-app.listen(port, hostname, () => {
+app.listen(env.APP_PORT, env.APP_HOST, () => {
   // eslint-disable-next-line no-console
-  console.log(`Hello Trung Quan Dev, I am running at ${hostname}:${port}/`)
+  console.log(
+    `Hello Trung Quan Dev, I am running at ${env.APP_HOST}:${env.APP_PORT}/`
+  )
 })

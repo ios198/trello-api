@@ -8,15 +8,12 @@
  * id:pass -  admin:admin
  */
 import mongoose from 'mongoose'
-
-const MONGGO_URL =
-  'mongodb+srv://admin:admin@master.uecpo7o.mongodb.net/?retryWrites=true&w=majority&appName=Master'
-const DATABASE_NAME = 'trello-api'
+import env from '~/config/environment.js'
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(MONGGO_URL, {
-      dbName: DATABASE_NAME,
+    await mongoose.connect(env.MONGODB_URI, {
+      dbName: env.DATABASE_NAME,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
