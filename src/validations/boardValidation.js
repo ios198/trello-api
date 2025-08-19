@@ -9,12 +9,8 @@ const createNewBoard = async (req, res, next) => {
   try {
     console.log(req.body)
     const result = await boardScheme.validateAsync(req.body)
-    //next()
-    // Log the request body for debugging
-    res.status(StatusCodes.CREATED).json({
-      message: 'Board created successfully!',
-      data: result,
-    })
+    // validate data then move to controller
+    next()
   } catch (error) {
     console.log(error)
     return res

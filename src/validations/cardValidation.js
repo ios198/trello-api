@@ -17,7 +17,7 @@ const createCard = async (req, res) => {
   } catch (error) {
     console.log(error)
     return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
       .json({ error: error.message })
   }
 }
