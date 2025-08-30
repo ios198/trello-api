@@ -3,3 +3,9 @@
  * YouTube: https://youtube.com/@trungquandev
  * "A bit of fragrance clings to the hand that gives flowers!"
  */
+
+//Những tài nguyên được phép truy cập server
+export const WHITELIST_DOMAINS = [
+  'http://localhost:5173',
+  'https://your-production-domain.com',
+]

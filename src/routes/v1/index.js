@@ -7,7 +7,7 @@
 import express from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { boardRoute } from './boadRoute.js'
-import { collumnRoute } from './collumnRoute.js'
+import { columnRoute } from './columnRoute.js'
 import { cardRoute } from './cardRoute.js'
 import { userRoute } from './userRoute.js'
 
@@ -21,7 +21,7 @@ Router.get('/status', (req, res) => {
 /* Boards api */
 Router.use('/boards', boardRoute)
 /* Columns api */
-Router.use('/columns', collumnRoute)
+Router.use('/columns', columnRoute)
 /* Cards api */
 Router.use('/cards', cardRoute)
 /* User api */

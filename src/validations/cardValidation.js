@@ -1,7 +1,7 @@
 const Joi = require('joi')
 import { StatusCodes } from 'http-status-codes'
-
-const createCard = async (req, res) => {
+import ApiError from '~/utils/ApiError'
+const createCard = async (req, res, next) => {
   const cardScheme = Joi.object({
     title: Joi.string().min(3).max(100).required(),
     description: Joi.string().max(500).optional(),
@@ -9,16 +9,12 @@ const createCard = async (req, res) => {
 
   try {
     const value = await cardScheme.validateAsync(req.body)
-    console.log(value)
-    res.status(StatusCodes.CREATED).json({
-      message: 'Card created successfully!',
-      data: value,
-    })
+    next()
   } catch (error) {
     console.log(error)
-    return res
-      .status(StatusCodes.UNPROCESSABLE_ENTITY)
-      .json({ error: error.message })
+    const mesErr = error.message
+    const newErr = new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, mesErr)
+    next(newErr)
   }
 }
 export const cardValidation = {
