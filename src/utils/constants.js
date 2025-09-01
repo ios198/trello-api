@@ -9,3 +9,12 @@ export const WHITELIST_DOMAINS = [
   'http://localhost:5173',
   'https://your-production-domain.com',
 ]
+
+export const BOARD_TYPES = {
+  PUBLIC: 'public',
+  PRIVATE: 'private',
+}
+
+export const BOARD_COLLECTION = 'boards'
+export const COLUMN_COLLECTION = 'columns'
+export const CARD_COLLECTION = 'cards'

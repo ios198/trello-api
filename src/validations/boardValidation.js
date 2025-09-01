@@ -1,11 +1,18 @@
 const Joi = require('joi')
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '~/utils/ApiError'
+import { BOARD_TYPES } from '~/utils/constants'
 const createNewBoard = async (req, res, next) => {
   const boardScheme = Joi.object({
     title: Joi.string().min(3).max(100).required(),
     description: Joi.string().max(500).optional(),
-    slug: Joi.string().min(3).max(100).optional(),
+    type: Joi.string()
+      .min(3)
+      .max(100)
+      .optional()
+      .valid(BOARD_TYPES.PUBLIC, BOARD_TYPES.PRIVATE),
+    ownerIds: Joi.array().items(Joi.string().length(24)).optional(),
+    memberIds: Joi.array().items(Joi.string().length(24)).optional(),
     columnOrderIds: Joi.array().items(Joi.string().length(24)).optional(),
   })
   try {

@@ -21,7 +21,13 @@ const getDetails = async (req, res, next) => {
   try {
     const boardId = req.params.id
     const board = await boardService.getDetails(boardId)
-    res.status(StatusCodes.OK).json(board)
+    if (!board) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Board not found', data: board })
+    }
+
+    return res.status(StatusCodes.OK).json(board)
   } catch (error) {
     next(error)
   }
