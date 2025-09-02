@@ -26,9 +26,17 @@ app.use('/v1', APIs_V1)
 //Middleware handling
 app.use(errorHandlingMiddleware)
 
-app.listen(env.APP_PORT, env.APP_HOST, () => {
-  // eslint-disable-next-line no-console
-  console.log(
-    `Hello Trung Quan Dev, I am running at ${env.APP_HOST}:${env.APP_PORT}/`
-  )
-})
+if (env.BUILD_MODE === 'prod') {
+  // Production mode
+  app.listen(process.env.PORT, () => {
+    console.log(`Production, I am running at ${env.APP_HOST}:${env.APP_PORT}/`)
+  })
+} else {
+  // Development mode
+  app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
+    // eslint-disable-next-line no-console
+    console.log(
+      `Development, I am running at ${env.LOCAL_DEV_APP_HOST}:${env.LOCAL_DEV_APP_PORT}/`
+    )
+  })
+}
